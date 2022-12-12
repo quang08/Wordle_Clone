@@ -17,15 +17,29 @@ const useWordle = (solution) => {
 
   //handle keyup event and track current guess
   //when user hit enter, add the new guess
-  const handleKeyup = () => {};
+  const handleKeyup = ({ key }) => { //destructure key in event
+    if(key === 'Backspace') { //delete
+        setCurrentGuess((prev) => {
+          return prev.slice(0,-1); //return a new string with last character removed
+        });
+        return;
+    }
+    if (key.match(/^[A-Za-z]$/)){
+        if(currentGuess.length < 5) {
+            setCurrentGuess(prev => {
+                return prev + key; //string so concatenate
+            })
+        }
+    }
+  };
 
   return {
     turn,
     currentGuess,
     guesses,
     isCorrect,
-    handleKeyup
-  }
+    handleKeyup,
+  };
 };
 
 export default useWordle;
