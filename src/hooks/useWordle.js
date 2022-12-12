@@ -6,6 +6,7 @@ const useWordle = (solution) => {
   const [guesses, setGuesses] = useState([...Array(6)]); //each guess is an array of formatted obj. This is an array of length 6 (6 rows, 6 tries for final answer of correct 5-character word)
   const [history, setHistory] = useState([]); //each guess is a string
   const [isCorrect, setIsCorrect] = useState(false);
+  const [usedKeys, setUsedKeys] = useState({}); //keep track of keys used and color should be {a: 'green', b:'yellow',..}
 
   // format a guess into an array of letter objects [{key: 'a', color: 'red'}]
   const formatGuess = () => {
@@ -56,6 +57,28 @@ const useWordle = (solution) => {
 
     setTurn((prevTurn) => {
       return prevTurn + 1;
+    });
+
+    setUsedKeys((prevUsedKeys) => {
+      //keypad
+      formattedGuess.forEach((l) => {
+        const currentColor = prevUsedKeys[l.key]; //formattedGuess : {key: p, color: 'grey} -> prevUsedKeys[key] is p
+
+        if (l.color === "green") {
+          prevUsedKeys[l.key] = "green"; // {p: 'green}
+          return;
+        }
+        if (l.color === "yellow" && currentColor !== "green") {
+          prevUsedKeys[l.key] = "yellow";
+          return;
+        }
+        if (l.color === "grey" && currentColor !== ("green" || "yellow")) {
+          prevUsedKeys[l.key] = "grey";
+          return;
+        }
+      });
+
+      return prevUsedKeys; //{p: 'grey', e: 'grey', n: 'yellow', i: 'yellow', s: 'grey'}
     });
 
     setCurrentGuess(""); //after hit enter, and already added new guess under the roof, then clear current guess to start a new guess on a new row
@@ -109,6 +132,7 @@ const useWordle = (solution) => {
     guesses,
     isCorrect,
     handleKeyup,
+    usedKeys,
   };
 };
 
