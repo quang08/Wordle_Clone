@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="App">
       <h1>Wordle</h1>
-      {solution && <Wordle/>}
+      {solution && <Wordle solution={solution}/>}
     </div>
   );
 }

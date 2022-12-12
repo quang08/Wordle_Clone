@@ -6,9 +6,14 @@ export default function Wordle({ solution }) {
 
   useEffect(() => {
     window.addEventListener("keyup", handleKeyup);
-    
-    return () => window.removeEventListener("keyup", handleKeyup); //keyup cleaner, prevent adding too many events
-  },[handleKeyup]); //every time handlekeyup is triggered + initial render
 
-  return <div>{currentGuess}</div>;
+    return () => window.removeEventListener("keyup", handleKeyup); //keyup cleaner, prevent adding too many events
+  }, [handleKeyup]); //every time handlekeyup is triggered + initial render
+
+  return (
+    <div>
+      <div>Solution: {solution}</div>
+      <div>Current Guess: {currentGuess}</div>
+    </div>
+  );
 }
