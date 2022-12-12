@@ -3,8 +3,8 @@ import { useState } from "react";
 const useWordle = (solution) => {
   const [turn, setTurn] = useState(0);
   const [currentGuess, setCurrentGuess] = useState("");
-  const [guesses, setGuesses] = useState([]); //each guess is an array
-  const [history, setHistory] = useState(["hello"]); //each guess is a string
+  const [guesses, setGuesses] = useState([...Array(6)]); //each guess is an array of formatted obj. This is an array of length 6 (6 rows, 6 tries for final answer of correct 5-character word)
+  const [history, setHistory] = useState([]); //each guess is a string
   const [isCorrect, setIsCorrect] = useState(false);
 
   // format a guess into an array of letter objects [{key: 'a', color: 'red'}]
@@ -40,7 +40,26 @@ const useWordle = (solution) => {
   //add guesses into the guesses state
   //update the isCorrect state if guess is correct
   //add 1 to turn state
-  const addNewGuess = () => {};
+  const addNewGuess = (formattedGuess) => {
+    if (currentGuess === solution) setIsCorrect(true);
+
+    setGuesses((prevGuesses) => {
+      let newGuesses = [...prevGuesses]; //all the current guess
+      newGuesses[turn] = formattedGuess;
+      //accessing the newGuesses array based on turn as index after every guess, then the newly formattedGuess will be added into the newGuesses arr
+      return newGuesses;
+    }); //update the guess state to the newGuesses array with the new guess added to it
+
+    setHistory((prevHistory) => {
+      return [...prevHistory, currentGuess];
+    });
+
+    setTurn((prevTurn) => {
+      return prevTurn + 1;
+    });
+
+    setCurrentGuess(""); //after hit enter, and already added new guess under the roof, then clear current guess to start a new guess on a new row
+  };
 
   //handle keyup event and track current guess
   //when user hit enter, add the new guess
@@ -65,6 +84,7 @@ const useWordle = (solution) => {
 
       const formatted = formatGuess();
       console.log(formatted);
+      addNewGuess(formatted);
     }
 
     if (key === "Backspace") {
