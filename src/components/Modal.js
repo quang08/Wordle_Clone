@@ -8,9 +8,15 @@ export default function Modal({ isCorrect, turn, solution }) {
           <h1>You Win!</h1>
           <p className="solution">{solution}</p>
           {turn < 2 ? (
-            <p>You found the solution in {turn} guess :)</p>
+            <span>
+              <p>You found the solution in {turn} guess :)</p>
+              <p>Refresh to play again</p>
+            </span>
           ) : (
-            <p>You found the solution in {turn} guessses :)</p>
+            <span>
+              <p>You found the solution in {turn} guesses :)</p>
+              <p>Refresh to play again</p>
+            </span>
           )}
         </div>
       )}

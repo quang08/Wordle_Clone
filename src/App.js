@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
+import Navbar from "./components/Navbar";
 import Wordle from "./components/Wordle";
+import useLocalStorage from "use-local-storage";
 
 function App() {
   const [solution, setSolution] = useState(null);
+  const [theme, setTheme] = useLocalStorage("theme" ? "dark" : "light");
+
+  const switchTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  };
 
   useEffect(() => {
     fetch("http://localhost:3001/solutions")
@@ -12,9 +20,15 @@ function App() {
         setSolution(randomSolution.word);
       });
   }, [setSolution]); //[] ?
+
   return (
-    <div className="App">
-      {solution && <Wordle solution={solution}/>}
+    <div className="app" data-theme={theme}>
+      <div className="navbar">
+        <div></div>
+        <h1>Wordle</h1>
+        <i onClick={switchTheme} className="fas fa-toggle-on toggle"></i>
+      </div>
+      {solution && <Wordle solution={solution} />}
     </div>
   );
 }

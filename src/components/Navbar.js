@@ -7,6 +7,7 @@ export default function Navbar() {
   const handler = () => {
     setShowSettings(!showSettings);
   };
+
   return (
     <div className="navbar">
       <div></div>

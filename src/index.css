@@ -1,14 +1,45 @@
+/* light theme variables */
+:root {
+  --background: #ffffff;
+  --key-background: #eee;
+  --text-primary: #000;
+  --text-secondary: #8e05c2;
+  --accent: #8e05c2;
+  --border: #bbb;
+  --form-bg: #fff;
+  --overlay: rgba(255,255,255,0.7);
+}
+
+/* dark theme variables */
+[data-theme = 'dark'] {
+  --background: #000;
+  --key-background: #333;
+  --text-primary: #fff;
+  --text-secondary: #8e05c2;
+  --accent: #8e05c2;
+  --border: #808080;
+  --form-bg: #191919;
+  --overlay: rgba(255,255,255,0.7);
+}
+
 body {
+  margin: 0;
+}
+
+.app {
   text-align: center;
   font-size: 1em;
   font-family: verdana;
   margin: 0;
+  background-color: var(--background);
+  height: 100vh;
+  transition: all .5s;
+  color: var(--text-primary)
 }
 .navbar {
   font-size: 1.2em;
-  border-bottom: 1px solid #eee;
+  border-bottom: 0.5px solid var(--border);
   margin: 0 0 30px 0;
-  color: #333;
   position: relative;
   display: flex;
   justify-content: space-around;
@@ -17,9 +48,6 @@ body {
 .settings {
   font-size: 1.3em;
 }
-/* .theme-toggle {
-  position: absolute;
-} */
 
 /* rows */
 .row {
@@ -31,7 +59,7 @@ body {
   display: block;
   width: 60px;
   height: 60px;
-  border: 1px solid #bbb;
+  border: 1px solid var(--border);
   margin: 4px;
   text-align: center;
   line-height: 60px;
@@ -83,10 +111,11 @@ body {
   margin: 5px;
   width: 40px;
   height: 50px;
-  background: #eee;
+  background: var(--key-background);
   display: inline-block;
   border-radius: 6px;
   line-height: 50px;
+  text-transform: capitalize;
 }
 .keypad > div.green {
   background: #5ac85a;
@@ -106,7 +135,7 @@ body {
 
 /*Modal*/
 .modal {
-  background: rgba(255,255,255,0.7);
+  background: var(--overlay);
   position: fixed;
   width: 100%;
   height: 100%;
@@ -115,7 +144,7 @@ body {
 }
 .modal div {
   max-width: 480px;
-  background: #fff;
+  background: var(--background);
   padding: 40px;
   border-radius: 10px;
   margin: 10% auto;
@@ -154,6 +183,7 @@ body {
 .toggle {
   font-size: 1.5em;
   cursor: pointer;
+  color: var(--text-primary);
 }
 
 .closeBtn {
