@@ -19,7 +19,7 @@ function App() {
         const randomSolution = data[Math.floor(Math.random() * data.length)];
         setSolution(randomSolution.word);
       });
-  }, [setSolution]); //[] ?
+  }, []); //[] ?
 
   return (
     <div className="app" data-theme={theme}>

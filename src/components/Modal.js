@@ -24,8 +24,11 @@ export default function Modal({ isCorrect, turn, solution }) {
       {!isCorrect && (
         <div>
           <h1>Nevermind!</h1>
-          <p className="solution">{solution}</p>
-          <p>Better luck next time :)</p>
+          <span>
+            <p className="solution">{solution}</p>
+            <p>Better luck next time :)</p>
+            <p>Refresh to play again</p>
+          </span>
         </div>
       )}
     </div>

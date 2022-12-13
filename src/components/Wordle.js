@@ -19,7 +19,7 @@ export default function Wordle({ solution }) {
       window.removeEventListener("keyup", handleKeyup);
     }
 
-    if (turn > 5) {
+    if (turn >= 6) {
       setTimeout(() => setShowModal(true), 2000); //show after lost 2s, because dont want to interrupt tiles animation
       window.removeEventListener("keyup", handleKeyup);
     }
