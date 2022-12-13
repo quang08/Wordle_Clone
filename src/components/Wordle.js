@@ -27,10 +27,6 @@ export default function Wordle({ solution }) {
     return () => window.removeEventListener("keyup", handleKeyup); //keyup cleaner, prevent adding too many events
   }, [handleKeyup, isCorrect, turn]); //every time handlekeyup or correct answer or out of turn is triggered + initial render
 
-  //   useEffect(() => {
-  //     console.log(guesses);
-  //   }, [guesses]);
-
   return (
     <div>
       <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />

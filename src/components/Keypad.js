@@ -10,8 +10,6 @@ export default function Keypad({ usedKeys }) {
         setLetters(json);
       });
   }, []);
-//   console.log('this is');
-//   console.log(usedKeys);
 
   return (
     <div className="keypad">

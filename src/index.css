@@ -115,7 +115,7 @@ body {
   display: inline-block;
   border-radius: 6px;
   line-height: 50px;
-  text-transform: capitalize;
+  text-transform: capitalize ;
 }
 .keypad > div.green {
   background: #5ac85a;
